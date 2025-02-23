@@ -1,0 +1,57 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods-clients-binding
+  namespace: clients
+subjects:
+- kind: Group
+  name: developers-clients
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: read-pods-clients
+  apiGroup: rbac.authorization.k8s.io 
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods-owners-binding
+  namespace: owners
+subjects:
+- kind: Group
+  name: developers-owners
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: read-pods-owners
+  apiGroup: rbac.authorization.k8s.io 
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods-develop-binding
+  namespace: development
+subjects:
+- kind: Group
+  name: developers
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: write-pods-develop
+  apiGroup: rbac.authorization.k8s.io 
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: write-pods-all-binding
+subjects:
+- kind: Group
+  name: devops-prod-support
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: write-pods-all
+  apiGroup: rbac.authorization.k8s.io
